@@ -29,7 +29,7 @@ var letters = [
   "z"
 ];
 
-var numbers = ["0", "1", "2"];
+var numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 var symbols = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")"];
 var pwLen = prompt("What is your password length?");
 var isSymbols = confirm("Would you like to use a symbol?");
@@ -54,7 +54,7 @@ function shuffle(array) {
 
   return array;
 }
-/* defined function */
+/* defined function to create password */
 function createPassword() {
   var pw = [];
   if (pwLen > 10) {
@@ -82,7 +82,19 @@ function createPassword() {
   pwShuffle = shuffle(pw);
   pwBox.innerHTML = pwShuffle.toString();
 }
+/* defined function to copy password*/
+function copyPassword() {
+  /*get the password field*/
+  var copyPass = document.getElementById("pwBox");
+  /*select the password field*/
+  copyPass.select();
+  copyPass.setSelectionRange(0, 9999); /*for mobile devices*/
 
+  /*Copy the password inside the password field*/
+  document.execCommand("copy");
+  /*alert the copied text*/
+  alert("Copied the password: " + copyPass.value);
+}
 /* first event */
 /* change this pw into a dynamic random pw */
 /* document.write(pw */
