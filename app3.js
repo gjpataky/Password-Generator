@@ -1,26 +1,92 @@
-function generatePassword(passwordLength) {
-  var numberChars = "0123456789";
-  var upperChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  var lowerChars = "abcdefghijklmnopqrstuvwxyz";
-  var allChars = numberChars + upperChars + lowerChars;
-  var randPasswordArray = Array(passwordLength);
-  randPasswordArray[0] = numberChars;
-  randPasswordArray[1] = upperChars;
-  randPasswordArray[2] = lowerChars;
-  randPasswordArray = randPasswordArray.fill(allChars, 3);
-  return shuffleArray(
-    randPasswordArray.map(function(x) {
-      return x[Math.floor(Math.random() * x.length)];
-    })
-  ).join("");
-}
+/*defined function*/
+console.log("app started");
+var letters = [
+  "a",
+  "b",
+  "c",
+  "d",
+  "e",
+  "f",
+  "g",
+  "h",
+  "i",
+  "j",
+  "k",
+  "l",
+  "m",
+  "n",
+  "o",
+  "p",
+  "q",
+  "r",
+  "s",
+  "t",
+  "u",
+  "v",
+  "w",
+  "x",
+  "y",
+  "z"
+];
 
-function shuffleArray(array) {
-  for (var i = array.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
+var numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+var symbols = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")"];
+var pwLen = prompt("What is your password length?");
+var isSymbols = confirm("Would you like to use a symbol?");
+var isNumbers = confirm("Would you like to use a number?");
+
+function shuffle(array) {
+  var currentIndex = array.length,
+    temporaryValue,
+    randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
   }
+
   return array;
 }
+/* defined function to create password */
+function createPassword() {
+  var pw = [];
+  if (pwLen > 10) {
+    pwLen = prompt("Your password has too many characters");
+    createPassword();
+  }
+  for (i = 0; i < pwLen; i++) {
+    if (isSymbols === true && i === 0) {
+      var randomSymNo = Math.floor(Math.random() * symbols.length);
+      /* inject a symbol into the string*/
+      pw.push(symbols[randomSymNo]);
+    } else if (isNumbers === true && i === 1) {
+      console.log("in numbers");
+      /*inject a letter into the string*/
+      var randomNo = Math.floor(Math.random() * numbers.length);
+      pw.push(numbers[randomNo]);
+    } else {
+      console.log("in letters");
+
+      var randomLet = Math.floor(Math.random() * letters.length);
+      pw.push(letters[randomLet]);
+    }
+  }
+  /*randomize array*/
+  pwShuffle = shuffle(pw);
+   = pwShuffle.toString();
+}
+/* defined function to copy password*/
+var copyBtn = document.getElementById("copyBtn");
+copyBtn.addEventListener("click", function() {
+  var copyPass = document.getElementById("password");
+  console.log(typeof copyPass.value);
+  copyPass.select();
+  document.execCommand("copy");
+});

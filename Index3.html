@@ -7,9 +7,13 @@
     <title>Document</title>
   </head>
   <body>
-    <input type="text" name="randomPassword" id="randomPassword" />
-    <button id="generatePassword">Generate Password</button>
-    <button onclick="copyPassword()">Copy</button>
-    <script src="app3.js"></script>
+    <!-- box to show password-->
+    <input type="text" id="pwBox" />
+    <!-- button to geneerate -->
+    <button onclick="createPassword()">Generate</button>
+    <!-- button copy to clipboard -->
+    <button id="copyBtn" onclick="copyPassword()">Copy</button>
+    <!-- external js -->
+    <script src="./app.js"></script>
   </body>
 </html>
